@@ -28,6 +28,8 @@ int main(int argc, const char * argv[]) {
     char buff[MAXLINE];
     ssize_t n;
     
+    printf("develop 分支修改");
+    
     
     // 初始化socket
     if( (socket_fd = socket(AF_INET, SOCK_STREAM, 0)) == -1){
@@ -110,6 +112,8 @@ int main(int argc, const char * argv[]) {
     }
     
     close(socket_fd);
+    
+    
     return 0;
 }
 
