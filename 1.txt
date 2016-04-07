@@ -1,0 +1,2 @@
+git onstage 1.txt
+== git reset HEAD — 1.txt
