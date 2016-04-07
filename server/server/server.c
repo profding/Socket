@@ -78,7 +78,9 @@ int main(int argc, const char * argv[]) {
     printf("===== 等待客户端连接 =====\n");
     while (1) {
         // 阻塞直到有客户端连接，不然多浪费CPU资源
-        if( (connect_fd = accept(socket_fd, (struct sockaddr *)NULL, NULL)) == -1)
+        connect_fd = accept(socket_fd, (struct sockaddr *)NULL, NULL);
+        printf("connect_fd is %d\n",connect_fd);
+        if( connect_fd == -1)
         {
             printf(" 接受 socket 失败: %s,错误号: %d\n",strerror(errno),errno);
             continue;

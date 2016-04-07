@@ -56,20 +56,22 @@ int main(int argc, char ** argv){
         exit(1);
     }
     
-    
-    printf("发送数据给服务器\n");
-    fgets(sendline, MAXLINE, stdin);
-    if ( send(sockfd,sendline,strlen(sendline),0) < 0 ) {
-        printf("发送数据给服务器 出错 %s (错误号：%d)\n",strerror(errno),errno);
-        exit(1);
+    while (1) { 
+        printf("发送数据给服务器\n");
+        fgets(sendline, MAXLINE, stdin);
+        printf("将要发送的数据：%s\n",sendline);
+        if ( send(sockfd,sendline,strlen(sendline),0) < 0 ) {
+            printf("发送数据给服务器 出错 %s (错误号：%d)\n",strerror(errno),errno);
+            exit(1);
+        }
+        
+        if ((rec_len = recv(sockfd, buf,MAXLINE, 0))== -1) {
+            perror("接收出错");
+            exit(1);
+        }
+        buf[rec_len] = '\0';
+        printf("接收到的数据为: %s\n",buf);
     }
-    
-    if ((rec_len = recv(sockfd, buf,MAXLINE, 0))== -1) {
-        perror("接收出错");
-        exit(1);
-    }
-    buf[rec_len] = '\0';
-    printf("接收到的数据为: %s\n",buf);
     close(sockfd);
     return 0;
 }
